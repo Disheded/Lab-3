@@ -92,9 +92,9 @@ public:
 
 
 
-    void setTime(int i) {
+    void setTime(int i, int time) {
         if (i >= 0 and i < processes.size()) {
-            processes[i]->time = {i};
+            processes[i]->time = {time};
         } else {
             cout << "Invalid index!" << endl;
         }
@@ -217,12 +217,46 @@ int main() {
                     break;
                 }
             }
+            bool ix{true};
+            while (ix) {
+                int choice;
+                cout << "What you want: 1 - set time to process 2 - remove process" << endl;
+                cin >> choice;
+                switch (choice) {
+                    case 1:
+                        cout << "Enter the number of processes you want to set time: ";
+                        int q;
+                        cin >> q;
+                        cout << "Enter the time: ";
+                        int time;
+                        cin >> time;
+                        monitoringSystem.setTime(q, time);
+                    break;
+                    case 2:
+                        cout << "Enter the number of processes you want to set time: ";
+                        int q_1;
+                        cin >> q_1;
+                        monitoringSystem.removeProcess(q_1);
+                    break;
+                }
+                string input_1;
+                cout << endl << "Stop y/n";
+                cin >> input_1;
+                if (input_1 == "y" or input_1 == "Y") ix = false;
+            }
             monitoringSystem.showAllProcess();
 
 
 
+            }
 
-        }
+
+
+
+
+
+
+
         if (number != 1 and number != 2) {
             cout << "Error! Enter a valid number!" << endl;
         }
