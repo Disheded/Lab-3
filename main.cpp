@@ -5,35 +5,68 @@
 using namespace std;
 
 class Process {
-    public:
+public:
     string name;
     string status;
     int time;
+public:
     virtual void printInfo(){}
     virtual ~Process(){}
 };
 
 class Machining : public Process {
+public:
     void printInfo() override {
-        cout << "Machining..." << endl;
+        cout << "Process: " << name << endl;
+        cout << "Process status: " << status << endl;
+        cout << "Process time: " << time << endl;
+    }
+    Machining() {
+        this->name = "Machining";
+        this->status = "running";
+        this->time = 10000;
     }
 };
 
 class Diagnostics : public Process {
+public:
     void printInfo() override {
-        cout << "Diagnosting..." << endl;
+        cout << "Process: " << name << endl;
+        cout << "Process status: " << status << endl;
+        cout << "Process time: " << time << endl;
+    }
+    Diagnostics() {
+        this->name = "Diagnostics";
+        this->status = "running";
+        this->time = 10000;
     }
 };
 
 class QualityCheck : public Process {
+public:
     void printInfo() override {
-        cout << "Quality Checking..." << endl;
+        cout << "Process: " << name << endl;
+        cout << "Process status: " << status << endl;
+        cout << "Process time: " << time << endl;
+    }
+    QualityCheck() {
+        this->name = "Quality Check";
+        this->status = "running";
+        this->time = 10000;
     }
 };
 
 class Repair : public Process {
+public:
     void printInfo() override {
-        cout << "Repairing..." << endl;
+        cout << "Process: " << name << endl;
+        cout << "Process status: " << status << endl;
+        cout << "Process time: " << time << endl;
+    }
+    Repair() {
+        this->name = "Repair";
+        this->status = "running";
+        this->time = 10000;
     }
 };
 
@@ -45,7 +78,39 @@ public:
         processes.push_back(process);
     }
 
-    
+    void setVectorSize(int size) {
+        processes.reserve(size);
+    }
+    void removeProcess(int i) {
+        if (i >= 0 and i < processes.size()) {
+            processes[i]->status = {"Removed"};
+            cout << "Process removed." << endl;
+        } else {
+            cout << "Invalid index!" << endl;
+        }
+    }
+
+
+
+    void setTime(int i) {
+        if (i >= 0 and i < processes.size()) {
+            processes[i]->time = {i};
+        } else {
+            cout << "Invalid index!" << endl;
+        }
+    }
+
+    void showAllProcess() {
+        if (processes.size() > 0) {
+            for (int i = 0; i < processes.size(); i++) {
+                processes[i]->printInfo();
+                cout << endl;
+            }
+        } else {
+            cout << "Array is empty..." << endl;
+        }
+    };
+
     ~MonitoringSystem() {
         for (int i = 0; i < processes.size(); i++) {
             delete processes[i];
@@ -129,6 +194,30 @@ int main() {
             }
         }
         if (number == 2) {
+            MonitoringSystem monitoringSystem;
+
+            int n_1;
+            cout << "Enter the number of processes you want to enter: ";
+            cin >> n_1;
+            monitoringSystem.setVectorSize(n_1);
+            srand(time(NULL));
+            for (int i = 0; i < n_1; i++) {
+                switch (rand() % 4) {
+                    case 0:
+                        monitoringSystem.addProcess(new Machining);
+                    break;
+                    case 1:
+                        monitoringSystem.addProcess(new Diagnostics);
+                    break;
+                    case 2:
+                        monitoringSystem.addProcess(new Repair);
+                    break;
+                    case 3:
+                        monitoringSystem.addProcess(new Repair);
+                    break;
+                }
+            }
+            monitoringSystem.showAllProcess();
 
 
 
