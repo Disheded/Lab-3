@@ -4,9 +4,54 @@
 #include <vector>
 using namespace std;
 
+class Process {
+    public:
+    string name;
+    string status;
+    int time;
+    virtual void printInfo(){}
+    virtual ~Process(){}
+};
 
+class Machining : public Process {
+    void printInfo() override {
+        cout << "Machining..." << endl;
+    }
+};
 
+class Diagnostics : public Process {
+    void printInfo() override {
+        cout << "Diagnosting..." << endl;
+    }
+};
 
+class QualityCheck : public Process {
+    void printInfo() override {
+        cout << "Quality Checking..." << endl;
+    }
+};
+
+class Repair : public Process {
+    void printInfo() override {
+        cout << "Repairing..." << endl;
+    }
+};
+
+class MonitoringSystem {
+private:
+    vector<Process*> processes;
+public:
+    void addProcess(Process* process) {
+        processes.push_back(process);
+    }
+
+    
+    ~MonitoringSystem() {
+        for (int i = 0; i < processes.size(); i++) {
+            delete processes[i];
+        }
+    }
+};
 
 
 
