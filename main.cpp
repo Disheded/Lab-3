@@ -165,7 +165,7 @@ int main() {
         int number;
         cout << "Please enter a number of exersice: ";
         cin >> number;
-        if (number == 1) {
+        if (number == 1) {                                // Task 1
             srand(time(NULL));
             cout << "Enter the number of figures you want to enter: ";
             int n;
@@ -193,7 +193,7 @@ int main() {
                 delete figures[i];
             }
         }
-        if (number == 2) {
+        if (number == 2) {                               // Task 2 (individual task)
             MonitoringSystem monitoringSystem;
 
             int n_1;
